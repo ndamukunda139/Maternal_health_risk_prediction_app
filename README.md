@@ -1,19 +1,19 @@
-# 🎈 Blank app template
+# 🎈 Maternal Health Risk Prediction App
 
-A simple Streamlit app template for you to modify!
+This application uses a Random Forest model to predict the risk level of maternal health based on various input features. The model has been trained on a dataset containing features such as age, blood pressure, blood sugar, body temperature, and heart rate. The risk levels are categorized as:
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
+Low risk (2)
+Moderate risk (1)
+High risk (0)
 
-### How to run it on your own machine
+The app allows users to input patient details and receive a risk prediction. It also includes sections for exploratory data analysis (EDA) and contact information.
 
-1. Install the requirements
+The machine learning model was trained on historical patient data with known outcomes. The model achieves:
 
-   ```
-   $ pip install -r requirements.txt
-   ```
+   - Accuracy: ~87%
+   - Precision: ~96% 
+   - Recall: ~95%
+   - ROC-AUC: ~95%
 
-2. Run the app
-
-   ```
-   $ streamlit run streamlit_app.py
-   ```
+   These metrics indicate good but not perfect predictive ability. Always consult healthcare professionals for 
+   medical decisions.
