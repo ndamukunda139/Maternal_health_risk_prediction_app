@@ -1,6 +1,7 @@
 import streamlit as st
 import joblib
 import pandas as pd
+from sklearn.exceptions import NotFittedError
 
 
 
@@ -35,7 +36,7 @@ age = st.number_input("Enter Age:", min_value=15, max_value=50, value=30)
 systolic_bp = st.number_input("Enter Systolic Blood Pressure:", min_value=80, max_value=200, value=120)
 diastolic_bp = st.number_input("Enter Diastolic Blood Pressure:", min_value=50, max_value=130, value=80)
 bs = st.number_input("Enter Blood Sugar (BS):", min_value=2.0, max_value=20.0, value=5.5, format="%.2f")
-body_temp = st.number_input("Enter Body Temperature:", min_value=35.0, max_value=42.0, value=37.0, format="%.1f")
+body_temp = st.number_input("Enter Body Temperature:", min_value=95.0, max_value=105.0, value=98.0, format="%.1f")
 heart_rate = st.number_input("Enter Heart Rate:", min_value=40, max_value=180, value=75)
 # ...rest of your code...# You can add a button to trigger prediction in the next step
 # predict_button = st.button("Predict Risk Level")
@@ -62,6 +63,18 @@ st.write(user_input_df)
 # Add a button to trigger prediction
 predict_button = st.button("Predict Risk Level")
 
+# Check if model is fitted
+
+if predict_button:
+    try:
+        user_input_scaled = scaler.transform(user_input_df)
+        prediction = model.predict(user_input_scaled)
+        decoded_prediction = label_encoder.inverse_transform(prediction)[0]
+        # ... display code as before ...
+    except NotFittedError:
+        st.error("One of the model components (scaler/model/encoder) is not fitted. Please retrain and save the components properly.")
+    except Exception as e:
+        st.error(f"An error occurred during prediction: {e}")
 
 
 ### Preprocess user input
